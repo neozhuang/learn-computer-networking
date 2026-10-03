@@ -1,11 +1,13 @@
 # SMTP Mail Client with STARTTLS
 
-This directory contains two small SMTP client examples written in C:
+This directory contains three small SMTP client examples written in C:
 
 - `mail_client.c` connects to a local SMTP server at `127.0.0.1:1025` without
   encryption.
 - `mail_client_ssl.c` connects to Gmail on port 587, upgrades the connection
   with STARTTLS, authenticates with `AUTH LOGIN`, and sends a message.
+- `mail_client_ssl_images.c` uses the same STARTTLS flow and adds an image as a
+  MIME attachment.
 
 ## TLS behavior
 
@@ -24,6 +26,7 @@ client:
 
 ```bash
 cc -Wall -Wextra -o mail_client_ssl mail_client_ssl.c -lssl -lcrypto
+cc -Wall -Wextra -o mail_client_ssl_images mail_client_ssl_images.c -lssl -lcrypto
 ```
 
 To compile the local, unencrypted example:
@@ -80,6 +83,12 @@ Do not commit credentials or include them directly in the source code.
 
 ```bash
 ./mail_client_ssl
+```
+
+To send an image attachment:
+
+```bash
+./mail_client_ssl_images photo.jpg
 ```
 
 The program prints the responses returned by the SMTP server. It does not print
